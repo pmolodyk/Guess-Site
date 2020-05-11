@@ -1,0 +1,11 @@
+<h1> {{ game.name }} </h1>
+<ul>
+{% for section in game.section_set.all %}
+    <h2><li>Section: {{ section.name }}</li></h2><br>
+    <ul>
+    {% for snippet in section.snippet_set.all %}
+        <li>{{snippet.artist}} - {{snippet.song}}</li> <br>
+    {% endfor %}
+    </ul>
+{% endfor %}
+</ul>

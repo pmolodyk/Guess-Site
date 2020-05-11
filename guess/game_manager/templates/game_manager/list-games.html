@@ -1,0 +1,11 @@
+<h1>{{ title }}</h1>
+
+<ul>
+{% for game in games %}
+    <li><a href="/game_manager/games/{{game.id}}/">{{ game.name }}</a></li>
+{% endfor %}
+</ul>
+<form action="{% url 'game_manager:createBlueprint' %}" method="post">
+    {% csrf_token %}
+    <button type="submit" name="new_blueprint">Create new game!</button>
+</form>

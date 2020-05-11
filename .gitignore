@@ -1,0 +1,5 @@
+guess/db.sqlite3
+guess/files
+guess/game_manager/migrations
+guess/game_manager/__pycache__
+guess/guess/__pycache__

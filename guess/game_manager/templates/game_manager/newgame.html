@@ -1,0 +1,26 @@
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form method="post", action="#", enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="text", value="{{blueprint.name}}", name="game-title">
+    <ul>
+        {% for section in blueprint.sectionblueprint_set.all %}
+            <li>
+                <input type="text", value="{{section.name}}", name="section-title-{{section.id}}">
+                {% for snippet in section.snippetblueprint_set.all %}
+                    <br>
+                    <input type="text", value="{{snippet.trackname}}", name="snippet-trackname-{{snippet.id}}"> -
+                    <input type="text", value="{{snippet.artist}}", name="snippet-artist-{{snippet.id}}"> -
+                    {% if snippet.file_set %}
+                        File set - <button type="submit" name="snippet-changefile-{{snippet.id}}">Change file</button>
+                    {% else %}
+                        <input type="file", name="snippet-file-{{snippet.id}}", accept=".mp3, .flac, .aac, .wav"> - <button type="submit" name="snippet-setfile-{{snippet.id}}">Set file</button>
+                    {% endif %}
+                {% endfor %}
+            </li>
+            <button type="submit", name="add-snippet", value="{{section.id}}">Add song to section</button>
+        {% endfor %}
+    </ul>
+    <button type="submit", name="add-section", value="addSection">Add Section</button>
+    <button type="submit", name="create", value="create">Create!</button>
+</form>
