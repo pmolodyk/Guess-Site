@@ -47,3 +47,15 @@ class SnippetBlueprint(models.Model):
     artist = models.CharField(max_length=50)
     trackname = models.CharField(max_length=50)
     section = models.ForeignKey(SectionBlueprint, on_delete=models.CASCADE)
+
+class GameSolution(models.Model):
+    owner = models.CharField(max_length=50) # Possibly bad
+    game = models.ForeignKey(Game, on_delete=models.CASCADE)
+
+class SnippetSolution(models.Model):
+    game = models.ForeignKey(GameSolution, on_delete=models.CASCADE)
+    snippet = models.ForeignKey(Snippet, on_delete=models.CASCADE)
+    author = models.CharField(max_length=50)
+    song = models.CharField(max_length=50)
+    other = models.CharField(max_length=100)
+    done = models.IntegerField(default=0)

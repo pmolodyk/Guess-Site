@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.files.storage import default_storage
 from django.conf import settings
 
-from .models import Game, Section, Snippet, GameBlueprint, SectionBlueprint, SnippetBlueprint
+from .models import Game, Section, Snippet, GameBlueprint, SectionBlueprint, SnippetBlueprint, GameSolution, SnippetSolution
 
 #Login Functions
 def loginView(request):
@@ -137,3 +137,11 @@ def createGameView(request, num):
             return redirect('/game_manager/dashboard')
 
     return render(request, 'game_manager/newgame.html', {'blueprint' : blueprint})
+
+#Gameplay
+@login_required
+def playGame(request, num):
+    if len(Game.objects.filter(id = num)) == 0:
+        return render(request, 'game_manager/access-denied.html', {'message' : 'This game does not exist! (probably)'})
+    game = Game.objects.filter(id = num)[0]
+    return render(request, 'game_manager/access-denied.html', {'message' : 'If you see this message, something is broken, please contact the developer.'})
